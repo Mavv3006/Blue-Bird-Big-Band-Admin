@@ -3,7 +3,7 @@ class Concert {
       this.description);
 
   /// format: yyyy-mm-dd
-  String date;
+  DateTime date;
 
   /// pattern: `\d{2}:\d{2}:\d{2}`
   String startTime;

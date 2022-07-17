@@ -1,3 +1,4 @@
+import 'package:admin_app/ui/pages/adding_concert_page.dart';
 import 'package:admin_app/ui/pages/concert_list_page.dart';
 import 'package:admin_app/util/bbbb_colors.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,11 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: BBBBColors.darkBlueColor,
           bottomAppBarColor: BBBBColors.darkBlueColor),
-      home: const ConcertListPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const ConcertListPage(),
+        '/add-concert': (context) => const AddingConcertPage()
+      },
     );
   }
 }
