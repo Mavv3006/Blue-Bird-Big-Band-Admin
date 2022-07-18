@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:admin_app/logic/concert_saving_service.dart';
+import 'package:admin_app/logic/models/concert_form_dto.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -11,14 +13,38 @@ class AddingConcertPage extends StatefulWidget {
 }
 
 class _AddingConcertPageState extends State<AddingConcertPage> {
-  final List<DropdownMenuItem<num>> bandNames = [
-    const DropdownMenuItem(value: 1, child: Text("Blue Bird Big Band")),
-    const DropdownMenuItem(value: 2, child: Text("Dometown Band"))
-  ];
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final Map<num, String> bandNameList = {
+    1: "Blue Bird Big Band",
+    2: "Dometown Band"
+  };
+
+  List<DropdownMenuItem<num>> get bandNames {
+    List<DropdownMenuItem<num>> result = [];
+    bandNameList.forEach((key, value) {
+      result.add(
+        DropdownMenuItem(
+          value: key,
+          child: Text(value),
+        ),
+      );
+    });
+    return result;
+  }
+
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> endTimeKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> startTimeKey = GlobalKey<FormFieldState>();
+
+  var organizerController = TextEditingController();
+  var locationController = TextEditingController();
   var dateController = TextEditingController();
   var startTimeController = TextEditingController();
   var endTimeController = TextEditingController();
+  var streetController = TextEditingController();
+  var houseNumberController = TextEditingController();
+  var plzController = TextEditingController();
+  var placeController = TextEditingController();
+
   num selectedBand = 1;
 
   @override
@@ -29,11 +55,12 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
       ),
       body: Scrollbar(
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
               TextFormField(
+                controller: organizerController,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: "Veranstalter / Veranstaltung",
@@ -47,9 +74,11 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
               ),
               const HelperText("Name des Veranstalters oder der Veranstaltung"),
               TextFormField(
+                controller: locationController,
                 decoration: const InputDecoration(
-                    border: UnderlineInputBorder(),
-                    labelText: "Beschreibung des Ortes"),
+                  border: UnderlineInputBorder(),
+                  labelText: "Beschreibung des Ortes",
+                ),
               ),
               const HelperText("Name des Ortes, an dem gespielt wird"),
               const Divider(color: Colors.white),
@@ -73,6 +102,7 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
                 },
               ),
               TextFormField(
+                key: startTimeKey,
                 controller: startTimeController,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
@@ -84,14 +114,17 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
                     context: context,
                     initialTime: TimeOfDay.now(),
                   );
-                  if (time == null) return;
+                  if (!mounted) return;
+                  BuildContext? currentContext = startTimeKey.currentContext;
+                  if (time == null || currentContext == null) return;
                   startTimeController.value = TextEditingValue(
-                    text: "${time.hour}:${time.minute}",
+                    text: time.format(currentContext),
                   );
                 },
               ),
               const HelperText("Startzeit des Konzerts"),
               TextFormField(
+                key: endTimeKey,
                 controller: endTimeController,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
@@ -103,15 +136,18 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
                     context: context,
                     initialTime: TimeOfDay.now(),
                   );
-                  if (time == null) return;
+                  if (!mounted) return;
+                  BuildContext? currentContext = endTimeKey.currentContext;
+                  if (time == null || currentContext == null) return;
                   endTimeController.value = TextEditingValue(
-                    text: "${time.hour}:${time.minute}",
+                    text: time.format(currentContext),
                   );
                 },
               ),
               const HelperText("Uhrzeit, bis wann das Konzert geht"),
               const Divider(color: Colors.white),
               TextFormField(
+                controller: streetController,
                 keyboardType: TextInputType.streetAddress,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
@@ -119,12 +155,14 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
                 ),
               ),
               TextFormField(
+                controller: houseNumberController,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: "Hausnummer",
                 ),
               ),
               TextFormField(
+                controller: plzController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
@@ -142,6 +180,7 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
                 },
               ),
               TextFormField(
+                controller: placeController,
                 decoration: const InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: "Ort",
@@ -166,20 +205,38 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          if (_formKey.currentState!.validate()) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text("Processing Data"),
-              ),
-            );
-          }
-          log(_formKey.currentState!.toStringShort());
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          if (!formKey.currentState!.validate()) return;
+          saveConcert();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Processing Data"),
+            ),
+          );
         },
-        child: const Icon(Icons.save),
+        icon: const Icon(Icons.save),
+        label: const Text("Save"),
       ),
     );
+  }
+
+  void saveConcert() async {
+    ConcertFormDto concertFormDto = ConcertFormDto(
+      organizer: organizerController.value,
+      locationDescription: locationController.value,
+      date: dateController.value,
+      startTime: startTimeController.value,
+      endTime: endTimeController.value,
+      street: streetController.value,
+      houseNumber: houseNumberController.value,
+      place: placeController.value,
+      plz: plzController.value,
+      band: {selectedBand: bandNameList[selectedBand]!},
+    );
+
+    ConcertSavingService savingService = ConcertSavingService(concertFormDto);
+    savingService.transformToConcert();
   }
 }
 

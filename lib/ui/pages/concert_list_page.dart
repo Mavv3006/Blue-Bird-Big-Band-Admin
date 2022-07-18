@@ -16,8 +16,9 @@ class ConcertListPage extends StatelessWidget {
         itemCount: mockConcerts.length,
         itemBuilder: (context, index) => ConcertWidget(mockConcerts[index]),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text("Add Concert"),
+        icon: const Icon(Icons.add),
         onPressed: () => Navigator.pushNamed(context, '/add-concert'),
       ),
     );

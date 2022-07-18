@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Concert {
   Concert(this.date, this.startTime, this.endTime, this.bandName, this.location,
       this.description);
@@ -13,6 +15,12 @@ class Concert {
   String bandName;
   ConcertLocation location;
   ConcertDescription description;
+  num? bandId;
+
+  @override
+  String toString() {
+    return "Concert{date: ${DateFormat('dd.MM.yyyy').format(date)}, startTime: $startTime, endTime: $endTime, bandName: $bandName, bandId?: ${bandId}, location: $location, description: $description}";
+  }
 }
 
 class ConcertDescription {
@@ -20,6 +28,11 @@ class ConcertDescription {
 
   String place;
   String organizer;
+
+  @override
+  String toString() {
+    return "ConcertDescription{place: $place, organizer: $organizer}";
+  }
 }
 
 class ConcertLocation {
@@ -35,4 +48,9 @@ class ConcertLocation {
 
   /// Name of the city the concert takes place.
   String name;
+
+  @override
+  String toString() {
+    return "ConcertLocation{street: $street, number: $number, plz: $plz, name: $name}";
+  }
 }
