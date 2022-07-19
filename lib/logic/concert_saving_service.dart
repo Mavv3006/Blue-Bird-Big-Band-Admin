@@ -1,14 +1,18 @@
 import 'dart:developer';
 
 import 'package:admin_app/logic/models/concert_form_dto.dart';
+import 'package:admin_app/logic/models/concert_service.dart';
 
 import 'models/concert.dart';
 
 class ConcertSavingService {
-  ConcertSavingService(this.concertFormDto);
-
+  ConcertSavingService({
+    required this.concertFormDto,
+    required this.concertService,
+  });
+  ConcertService concertService;
   ConcertFormDto concertFormDto;
-  late Concert concert;
+  Concert? concert;
 
   void transformToConcert() {
     List<String> dateComponents = concertFormDto.date.text.split('.');
@@ -26,8 +30,8 @@ class ConcertSavingService {
     String street = concertFormDto.street.text;
     String number = concertFormDto.houseNumber.text;
     num plz = int.parse(concertFormDto.plz.text);
-    String name = concertFormDto.locationDescription.text;
-    String place = concertFormDto.place.text;
+    String name = concertFormDto.place.text;
+    String place = concertFormDto.locationDescription.text;
     String organizer = concertFormDto.organizer.text;
 
     ConcertLocation location = ConcertLocation(street, number, plz, name);
@@ -40,8 +44,15 @@ class ConcertSavingService {
       location,
       description,
     );
-    concert.bandId = bandId;
+    concert!.bandId = bandId;
 
     log(concert.toString());
+  }
+
+  bool save() {
+    if (concert == null) return false;
+
+    concertService.addConcert(concert!);
+    return true;
   }
 }

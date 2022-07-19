@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:admin_app/logic/concert_saving_service.dart';
 import 'package:admin_app/logic/models/concert_form_dto.dart';
+import 'package:admin_app/logic/models/concert_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddingConcertPage extends StatefulWidget {
   const AddingConcertPage({Key? key}) : super(key: key);
@@ -46,9 +48,12 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
   var placeController = TextEditingController();
 
   num selectedBand = 1;
+  late ConcertService concertService;
 
   @override
   Widget build(BuildContext context) {
+    concertService = Provider.of<ConcertService>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Konzert hinzufügen"),
@@ -208,12 +213,14 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
           if (!formKey.currentState!.validate()) return;
-          saveConcert();
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text("Processing Data"),
             ),
           );
+          await saveConcert();
+          if (!mounted) return;
+          Navigator.pop(context);
         },
         icon: const Icon(Icons.save),
         label: const Text("Save"),
@@ -221,7 +228,7 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
     );
   }
 
-  void saveConcert() async {
+  Future<void> saveConcert() async {
     ConcertFormDto concertFormDto = ConcertFormDto(
       organizer: organizerController.value,
       locationDescription: locationController.value,
@@ -235,8 +242,12 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
       band: {selectedBand: bandNameList[selectedBand]!},
     );
 
-    ConcertSavingService savingService = ConcertSavingService(concertFormDto);
+    ConcertSavingService savingService = ConcertSavingService(
+      concertFormDto: concertFormDto,
+      concertService: concertService,
+    );
     savingService.transformToConcert();
+    savingService.save();
   }
 }
 

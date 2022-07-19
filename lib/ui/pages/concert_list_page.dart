@@ -1,5 +1,6 @@
-import 'package:admin_app/dev_data/mock_concerts.dart';
+import 'package:admin_app/logic/models/concert_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/concert_widget.dart';
 
@@ -8,13 +9,23 @@ class ConcertListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ConcertService concertService = context.watch<ConcertService>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Konzert Liste"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.sync),
+            onPressed: () {},
+          )
+        ],
       ),
       body: ListView.builder(
-        itemCount: mockConcerts.length,
-        itemBuilder: (context, index) => ConcertWidget(mockConcerts[index]),
+        itemCount: concertService.concertCount,
+        itemBuilder: (context, index) => ConcertWidget(
+          concertService.all[index],
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Add Concert"),
