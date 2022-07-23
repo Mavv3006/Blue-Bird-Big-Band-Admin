@@ -21,6 +21,40 @@ class Concert {
   String toString() {
     return "Concert{date: ${DateFormat('dd.MM.yyyy').format(date)}, startTime: $startTime, endTime: $endTime, bandName: $bandName, bandId?: ${bandId}, location: $location, description: $description}";
   }
+
+  ///  {
+  ///    "date": "2022-07-23",
+  ///    "start_time": "string",
+  ///    "end_time": "string",
+  ///    "band_name": "string",
+  ///    "location": {
+  ///      "street": "string",
+  ///      "number": "string",
+  ///      "plz": 99999,
+  ///      "name": "string"
+  ///    }
+  ///  }
+  factory Concert.fromJson(Map<String, dynamic> json) {
+    Map<String, dynamic> location = json['location'];
+    Map<String, dynamic> descriptions = json['descriptions'];
+
+    return Concert(
+      DateTime.parse(json['date'] as String),
+      json['start_time'] as String,
+      json['end_time'] as String,
+      json['band_name'] as String,
+      ConcertLocation(
+        location['street' as String],
+        location['number'] as String,
+        location['plz'] as num,
+        location['name'] as String,
+      ),
+      ConcertDescription(
+        descriptions['place'] as String,
+        descriptions['organizer'] as String,
+      ),
+    );
+  }
 }
 
 class ConcertDescription {
