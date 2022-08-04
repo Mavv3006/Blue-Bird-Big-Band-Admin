@@ -21,6 +21,15 @@ class Concert {
   String toString() {
     return "Concert{date: ${DateFormat('dd.MM.yyyy').format(date)}, startTime: $startTime, endTime: $endTime, bandName: $bandName, bandId?: ${bandId}, location: $location, description: $description}";
   }
+
+  Map<String, dynamic> toJson() => {
+        "date": DateFormat("yyyy-MM-dd").format(date),
+        "start_time": startTime,
+        "end_time": endTime,
+        "band_name": bandName,
+        "location": location.toJson(),
+        "descriptions": description.toJson()
+      };
 }
 
 class ConcertDescription {
@@ -33,6 +42,11 @@ class ConcertDescription {
   String toString() {
     return "ConcertDescription{place: $place, organizer: $organizer}";
   }
+
+  Map<String, dynamic> toJson() => {
+        'place': place,
+        'organizer': organizer,
+      };
 }
 
 class ConcertLocation {
@@ -53,4 +67,11 @@ class ConcertLocation {
   String toString() {
     return "ConcertLocation{street: $street, number: $number, plz: $plz, name: $name}";
   }
+
+  Map<String, dynamic> toJson() => {
+        "street": street,
+        "number": number,
+        "plz": plz,
+        "name": name,
+      };
 }
