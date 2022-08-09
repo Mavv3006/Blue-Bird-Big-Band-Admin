@@ -1,8 +1,8 @@
-import 'package:admin_app/logic/models/concert_service.dart';
 import 'package:admin_app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/concert_service.dart';
 import 'screens/addingConcertScreen/adding_concert_screen.dart';
 import 'screens/concertListScreen/concert_list_screen.dart';
 
