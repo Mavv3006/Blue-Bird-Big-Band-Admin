@@ -1,4 +1,4 @@
-import 'package:admin_app/logic/models/concert.dart';
+import '../models/concert.dart';
 
 List<Concert> mockConcerts = [
   Concert(

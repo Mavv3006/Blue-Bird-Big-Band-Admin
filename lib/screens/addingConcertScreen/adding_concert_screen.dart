@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:admin_app/logic/concert_saving_service.dart';
 import 'package:admin_app/logic/models/concert_form_dto.dart';
 import 'package:admin_app/logic/models/concert_service.dart';
@@ -7,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class AddingConcertPage extends StatefulWidget {
-  const AddingConcertPage({Key? key}) : super(key: key);
+class AddingConcertScreen extends StatefulWidget {
+  const AddingConcertScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddingConcertPage> createState() => _AddingConcertPageState();
+  State<AddingConcertScreen> createState() => _AddingConcertScreenState();
 }
 
-class _AddingConcertPageState extends State<AddingConcertPage> {
+class _AddingConcertScreenState extends State<AddingConcertScreen> {
   final Map<num, String> bandNameList = {
     1: "Blue Bird Big Band",
     2: "Dometown Band"

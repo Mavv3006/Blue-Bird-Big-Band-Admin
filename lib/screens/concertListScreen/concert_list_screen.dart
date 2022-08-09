@@ -2,10 +2,10 @@ import 'package:admin_app/logic/models/concert_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../components/concert_widget.dart';
+import 'widgets/concert_widget.dart';
 
-class ConcertListPage extends StatelessWidget {
-  const ConcertListPage({Key? key}) : super(key: key);
+class ConcertListScreen extends StatelessWidget {
+  const ConcertListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

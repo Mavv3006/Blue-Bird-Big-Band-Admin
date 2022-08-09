@@ -1,9 +1,10 @@
 import 'package:admin_app/logic/models/concert_service.dart';
-import 'package:admin_app/ui/pages/adding_concert_page.dart';
-import 'package:admin_app/ui/pages/concert_list_page.dart';
-import 'package:admin_app/util/bbbb_colors.dart';
+import 'package:admin_app/util/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'screens/addingConcertScreen/adding_concert_screen.dart';
+import 'screens/concertListScreen/concert_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,12 +34,12 @@ class MyApp extends StatelessWidget {
             // or simply save your changes to "hot reload" in a Flutter IDE).
             // Notice that the counter didn't reset back to zero; the application
             // is not restarted.
-            primarySwatch: BBBBColors.darkBlueColor,
-            bottomAppBarColor: BBBBColors.darkBlueColor),
+            primarySwatch: MyColors.darkBlueColor,
+            bottomAppBarColor: MyColors.darkBlueColor),
         initialRoute: '/',
         routes: {
-          '/': (context) => const ConcertListPage(),
-          '/add-concert': (context) => const AddingConcertPage()
+          '/': (context) => const ConcertListScreen(),
+          '/add-concert': (context) => const AddingConcertScreen()
         },
       ),
     );
