@@ -1,9 +1,10 @@
-import 'package:admin_app/logic/concert_saving_service.dart';
-import 'package:admin_app/logic/models/concert_form_dto.dart';
-import 'package:admin_app/logic/models/concert_service.dart';
+import 'package:admin_app/resources/concert_saving_service.dart';
+import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
+import '../../models/concert_form_dto.dart';
 
 class AddingConcertScreen extends StatefulWidget {
   const AddingConcertScreen({Key? key}) : super(key: key);
@@ -46,11 +47,11 @@ class _AddingConcertScreenState extends State<AddingConcertScreen> {
   var placeController = TextEditingController();
 
   num selectedBand = 1;
-  late ConcertService concertService;
+  late ConcertProvider concertProvider;
 
   @override
   Widget build(BuildContext context) {
-    concertService = Provider.of<ConcertService>(context, listen: false);
+    concertProvider = Provider.of<ConcertProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -242,7 +243,7 @@ class _AddingConcertScreenState extends State<AddingConcertScreen> {
 
     ConcertSavingService savingService = ConcertSavingService(
       concertFormDto: concertFormDto,
-      concertService: concertService,
+      concertService: concertProvider,
     );
     savingService.transformToConcert();
     savingService.save();

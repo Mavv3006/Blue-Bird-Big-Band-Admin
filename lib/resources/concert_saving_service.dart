@@ -1,16 +1,15 @@
 import 'dart:developer';
 
-import 'package:admin_app/logic/models/concert_form_dto.dart';
-import 'package:admin_app/logic/models/concert_service.dart';
-
-import 'models/concert.dart';
+import 'package:admin_app/models/concert.dart';
+import 'package:admin_app/models/concert_form_dto.dart';
+import 'package:admin_app/resources/provider/concert_provider.dart';
 
 class ConcertSavingService {
   ConcertSavingService({
     required this.concertFormDto,
     required this.concertService,
   });
-  ConcertService concertService;
+  ConcertProvider concertService;
   ConcertFormDto concertFormDto;
   Concert? concert;
 

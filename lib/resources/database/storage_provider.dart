@@ -1,1 +1,1 @@
-abstract class StorageProvider {}
+class StorageProvider {}

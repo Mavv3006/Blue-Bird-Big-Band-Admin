@@ -6,9 +6,8 @@ import '../../dev_data/mock_concerts.dart';
 import '../../models/concert.dart';
 
 class ConcertProvider extends ChangeNotifier {
-  ApiProvider apiProvider;
-  StorageProvider storageProvider;
-
+  final ApiProvider apiProvider = ApiProvider();
+  final StorageProvider storageProvider = StorageProvider();
   final List<Concert> _concerts = [];
 
   void addConcert(Concert concert) {
