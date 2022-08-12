@@ -30,6 +30,16 @@ class Concert {
         "location": location.toJson(),
         "descriptions": description.toJson()
       };
+
+  Concert.fromJson(Map<String, dynamic> json)
+      : this(
+          DateTime.parse(json['date'] as String),
+          json['start_time'] as String,
+          json['end_time'] as String,
+          json['band_name'] as String,
+          ConcertLocation.fromJson(json['location']),
+          ConcertDescription.fromJson(json['descriptions']),
+        );
 }
 
 class ConcertDescription {
@@ -47,6 +57,12 @@ class ConcertDescription {
         'place': place,
         'organizer': organizer,
       };
+
+  ConcertDescription.fromJson(Map<String, dynamic> json)
+      : this(
+          json['place'] as String,
+          json['organizer'] as String,
+        );
 }
 
 class ConcertLocation {
@@ -74,4 +90,12 @@ class ConcertLocation {
         "plz": plz,
         "name": name,
       };
+
+  ConcertLocation.fromJson(Map<String, dynamic> json)
+      : this(
+          json['street'] as String,
+          json['number'] as String,
+          json['plz'] as int,
+          json['name'] as String,
+        );
 }
