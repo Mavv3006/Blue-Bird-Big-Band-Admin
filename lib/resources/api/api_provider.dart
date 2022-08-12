@@ -37,8 +37,7 @@ class ApiProvider {
 
   Future<List<Concert>> getConcertListRequest(Uri uri) async {
     Response response = await client.get(uri);
-    List<Map<String, dynamic>> jsonResponse =
-        json.decode(response.body) as List<Map<String, dynamic>>;
+    var jsonResponse = json.decode(response.body);
     Iterable<Concert> resultList = jsonResponse.map<Concert>(
       (e) => Concert.fromJson(e),
     );
