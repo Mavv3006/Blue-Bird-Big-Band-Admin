@@ -1,4 +1,4 @@
-import 'package:admin_app/logic/models/concert.dart';
+import 'package:admin_app/models/concert.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

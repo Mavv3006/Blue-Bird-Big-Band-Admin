@@ -1,20 +1,19 @@
-import 'dart:developer';
-
-import 'package:admin_app/logic/concert_saving_service.dart';
-import 'package:admin_app/logic/models/concert_form_dto.dart';
-import 'package:admin_app/logic/models/concert_service.dart';
+import 'package:admin_app/resources/concert_saving_service.dart';
+import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class AddingConcertPage extends StatefulWidget {
-  const AddingConcertPage({Key? key}) : super(key: key);
+import '../../models/concert_form_dto.dart';
+
+class AddingConcertScreen extends StatefulWidget {
+  const AddingConcertScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddingConcertPage> createState() => _AddingConcertPageState();
+  State<AddingConcertScreen> createState() => _AddingConcertScreenState();
 }
 
-class _AddingConcertPageState extends State<AddingConcertPage> {
+class _AddingConcertScreenState extends State<AddingConcertScreen> {
   final Map<num, String> bandNameList = {
     1: "Blue Bird Big Band",
     2: "Dometown Band"
@@ -48,11 +47,11 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
   var placeController = TextEditingController();
 
   num selectedBand = 1;
-  late ConcertService concertService;
+  late ConcertProvider concertProvider;
 
   @override
   Widget build(BuildContext context) {
-    concertService = Provider.of<ConcertService>(context, listen: false);
+    concertProvider = Provider.of<ConcertProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -244,7 +243,7 @@ class _AddingConcertPageState extends State<AddingConcertPage> {
 
     ConcertSavingService savingService = ConcertSavingService(
       concertFormDto: concertFormDto,
-      concertService: concertService,
+      concertService: concertProvider,
     );
     savingService.transformToConcert();
     savingService.save();

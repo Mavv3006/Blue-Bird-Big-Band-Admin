@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BBBBColors {
+class MyColors {
   // color palette from https://materialpalettes.com/
   static const darkBlueColor = MaterialColor(0xFF041286, {
     50: Color(0xffeae5f4),

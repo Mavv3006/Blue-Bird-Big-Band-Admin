@@ -1,15 +1,15 @@
-import 'package:admin_app/logic/models/concert_service.dart';
+import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../components/concert_widget.dart';
+import 'widgets/concert_widget.dart';
 
-class ConcertListPage extends StatelessWidget {
-  const ConcertListPage({Key? key}) : super(key: key);
+class ConcertListScreen extends StatelessWidget {
+  const ConcertListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    ConcertService concertService = context.watch<ConcertService>();
+    ConcertProvider concertProvider = context.watch<ConcertProvider>();
 
     return Scaffold(
       appBar: AppBar(
@@ -22,9 +22,9 @@ class ConcertListPage extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: concertService.concertCount,
+        itemCount: concertProvider.concertCount,
         itemBuilder: (context, index) => ConcertWidget(
-          concertService.all[index],
+          concertProvider.all[index],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
