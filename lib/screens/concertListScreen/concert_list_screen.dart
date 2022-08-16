@@ -1,4 +1,5 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
+import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,7 @@ class ConcertListScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Add Concert"),
         icon: const Icon(Icons.add),
-        onPressed: () => Navigator.pushNamed(context, '/add-concert'),
+        onPressed: () => Navigator.pushNamed(context, Routes.addConcert1),
       ),
     );
   }

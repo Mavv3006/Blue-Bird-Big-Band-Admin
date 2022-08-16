@@ -1,4 +1,5 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
+import 'package:admin_app/screens/addingConcertScreen/adding_concert_1.dart';
 import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,9 @@ class MyApp extends StatelessWidget {
         initialRoute: Routes.index,
         routes: {
           Routes.index: (context) => const ConcertListScreen(),
-          Routes.addConcert: (context) => const AddingConcertScreen()
+          Routes.addConcert1: (context) => const AddingConcert1Screen(),
+          // Routes.addConcert2: (context) => const AddingConcertScreen(),
+          // Routes.addConcert3: (context) => const AddingConcertScreen(),
         },
       ),
     );

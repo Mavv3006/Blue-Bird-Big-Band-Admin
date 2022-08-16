@@ -31,6 +31,7 @@ class ApiProvider {
   Future<num> postNewConcert(Concert concert) async {
     Uri uri = baseUrl.replace(path: '${baseUrl.path}/concert');
     Map<String, dynamic> json = concert.toJson();
+    print(json);
     Response response = await client.post(uri, body: json);
     return response.statusCode;
   }

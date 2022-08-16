@@ -15,3 +15,9 @@ class MyColors {
     900: Color(0xff041186)
   });
 }
+
+class AddingConcertColors {
+  static const Color darkBlue = Color(0xFF020E8E);
+  static const Color lightBlue = Color(0xFFB8BCFE);
+  static const Color backgroundColor = Color(0xFFF2F2F2);
+}
