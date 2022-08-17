@@ -1,5 +1,6 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_1.dart';
+import 'package:admin_app/screens/addingConcertScreen/adding_concert_2.dart';
 import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,25 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'BBBB Admin',
         theme: ThemeData(
-          primarySwatch: MyColors.darkBlueColor,
-          bottomAppBarColor: MyColors.darkBlueColor,
+          colorScheme: const ColorScheme(
+            brightness: Brightness.light,
+            primary: AddingConcertColors.lightBlue,
+            onPrimary: AddingConcertColors.darkBlue,
+            secondary: Colors.amber,
+            onSecondary: Colors.black87,
+            error: Colors.redAccent,
+            onError: Colors.black87,
+            background: AddingConcertColors.backgroundColor,
+            onBackground: Colors.black,
+            surface: Colors.white,
+            onSurface: Colors.black87,
+          ),
         ),
         initialRoute: Routes.index,
         routes: {
           Routes.index: (context) => const ConcertListScreen(),
           Routes.addConcert1: (context) => const AddingConcert1Screen(),
-          // Routes.addConcert2: (context) => const AddingConcertScreen(),
+          Routes.addConcert2: (context) => const AddingConcert2Screen(),
           // Routes.addConcert3: (context) => const AddingConcertScreen(),
         },
       ),

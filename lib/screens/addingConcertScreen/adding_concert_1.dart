@@ -1,8 +1,8 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
-import 'package:admin_app/screens/addingConcertScreen/adding_concert_screen.dart';
 import 'package:admin_app/util/colors.dart';
+import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_app/util/constants.dart' as constants;
 
@@ -33,6 +33,7 @@ class _AddingConcert1ScreenState extends State<AddingConcert1Screen> {
   @override
   Widget build(BuildContext context) {
     return AddingConcertScaffold(
+      appBarTitle: "Band auswählen",
       child: Stack(
         children: [
           Padding(
@@ -52,8 +53,11 @@ class _AddingConcert1ScreenState extends State<AddingConcert1Screen> {
                   textAlign: TextAlign.center,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.only(left: 48.0, right: 48.0, top: 32),
+                  padding: const EdgeInsets.only(
+                    left: 48.0,
+                    right: 48.0,
+                    top: 32,
+                  ),
                   child: DropdownButtonFormField(
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -76,7 +80,10 @@ class _AddingConcert1ScreenState extends State<AddingConcert1Screen> {
               ],
             ),
           ),
-          const AddingConcertContinueButton(buttonText: "Weiter"),
+          AddingConcertContinueButton(
+            buttonText: "Weiter",
+            onPressed: () => Navigator.pushNamed(context, Routes.addConcert2),
+          ),
         ],
       ),
     );

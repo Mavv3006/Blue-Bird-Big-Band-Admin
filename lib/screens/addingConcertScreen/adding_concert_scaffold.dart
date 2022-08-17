@@ -1,22 +1,22 @@
 import 'package:admin_app/util/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AddingConcertScaffold extends StatelessWidget {
-  const AddingConcertScaffold({Key? key, required this.child})
+  const AddingConcertScaffold(
+      {Key? key, required this.child, required this.appBarTitle})
       : super(key: key);
 
   final Widget child;
+  final String appBarTitle;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AddingConcertColors.backgroundColor,
         appBar: AppBar(
-          title: const Text(
-            "Band auswählen",
-            style: TextStyle(
+          title: Text(
+            appBarTitle,
+            style: const TextStyle(
               color: AddingConcertColors.darkBlue,
             ),
           ),
