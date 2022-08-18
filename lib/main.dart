@@ -1,13 +1,14 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_1.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_2.dart';
+import 'package:admin_app/screens/addingConcertScreen/adding_concert_3.dart';
+import 'package:admin_app/screens/addingConcertScreen/adding_concert_4.dart';
+import 'package:admin_app/screens/concertListScreen/concert_list_screen.dart';
 import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-
-import 'screens/addingConcertScreen/adding_concert_screen.dart';
-import 'screens/concertListScreen/concert_list_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,8 +47,14 @@ class MyApp extends StatelessWidget {
           Routes.index: (context) => const ConcertListScreen(),
           Routes.addConcert1: (context) => const AddingConcert1Screen(),
           Routes.addConcert2: (context) => const AddingConcert2Screen(),
-          // Routes.addConcert3: (context) => const AddingConcertScreen(),
+          Routes.addConcert3: (context) => const AddingConcert3Screen(),
+          Routes.addConcert4: (context) => const AddingConcert4Screen(),
         },
+        supportedLocales: const [Locale('de', 'DE')],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
       ),
     );
   }

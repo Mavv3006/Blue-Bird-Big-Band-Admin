@@ -1,6 +1,7 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
+import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
 import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +44,7 @@ class _AddingConcert1ScreenState extends State<AddingConcert1Screen> {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(left: 64, right: 64, bottom: 8),
-                  child: Placeholder(
-                    color: AddingConcertColors.darkBlue,
-                    fallbackHeight: 300,
-                  ),
+                  child: ImagePlaceholder(),
                 ),
                 const Text(
                   "Bitte wähle aus, welche Band an \ndem Auftritt spielt.",
@@ -59,12 +57,13 @@ class _AddingConcert1ScreenState extends State<AddingConcert1Screen> {
                     top: 32,
                   ),
                   child: DropdownButtonFormField(
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
                       labelText: "Welche Band spielt?",
-                      enabledBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: AddingConcertColors.darkBlue),
+                      enabledBorder: constants.darkBlueOutlineInputBorder,
+                      focusedBorder: constants.darkBlueOutlineInputBorder,
+                      labelStyle: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
                     ),
                     value: selectedBand,

@@ -1,6 +1,10 @@
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
+import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
+import 'package:admin_app/screens/addingConcertScreen/text_field.dart';
 import 'package:admin_app/util/colors.dart';
+import 'package:admin_app/util/constants.dart';
+import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
 
 class AddingConcert2Screen extends StatefulWidget {
@@ -16,6 +20,10 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
 
   @override
   Widget build(BuildContext context) {
+    var onPrimaryColorTextStyle = TextStyle(
+      color: Theme.of(context).colorScheme.onPrimary,
+    );
+
     return AddingConcertScaffold(
       appBarTitle: "Beschreibungen eingeben",
       child: Stack(
@@ -27,13 +35,10 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
               children: [
                 const Padding(
                   padding: EdgeInsets.only(left: 64, right: 64, bottom: 8),
-                  child: Placeholder(
-                    color: AddingConcertColors.darkBlue,
-                    fallbackHeight: 300,
-                  ),
+                  child: ImagePlaceholder(),
                 ),
                 const Text(
-                  "Bitte wähle aus, welche Band an \ndem Auftritt spielt.",
+                  "Bitte beschreibe, den Anlass für den Auftritt\nund wie die Location heißt, an der die Band spielt.",
                   textAlign: TextAlign.center,
                 ),
                 Padding(
@@ -45,20 +50,15 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TextFormField(
+                      ConcertAddingTextField(
                         controller: locationController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "Ortsbeschreibung",
-                        ),
+                        labelText: "Ortsbeschreibung",
                       ),
-                      TextFormField(
+                      sizedBox32,
+                      ConcertAddingTextField(
                         controller: organizerController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "Veranstaltungsname",
-                        ),
-                      )
+                        labelText: "Veranstaltungsname",
+                      ),
                     ],
                   ),
                 )
@@ -67,7 +67,7 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
           ),
           AddingConcertContinueButton(
             buttonText: "Weiter",
-            onPressed: () {},
+            onPressed: () => Navigator.pushNamed(context, Routes.addConcert3),
           ),
         ],
       ),

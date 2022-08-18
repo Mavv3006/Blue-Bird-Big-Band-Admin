@@ -2,12 +2,12 @@ import 'package:admin_app/util/colors.dart';
 import 'package:flutter/material.dart';
 
 class AddingConcertContinueButton extends StatelessWidget {
-  AddingConcertContinueButton(
+  const AddingConcertContinueButton(
       {Key? key, required this.buttonText, required this.onPressed})
       : super(key: key);
 
   final String buttonText;
-  VoidCallback? onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
