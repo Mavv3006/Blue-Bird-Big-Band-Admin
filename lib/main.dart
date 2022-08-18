@@ -50,9 +50,9 @@ class MyApp extends StatelessWidget {
           Routes.addConcert3: (context) => const AddingConcert3Screen(),
           Routes.addConcert4: (context) => const AddingConcert4Screen(),
         },
-        supportedLocales: const [Locale('de', 'DE')],
+        supportedLocales: const [Locale('de', 'DE'), Locale('en', 'EN')],
         localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
           GlobalWidgetsLocalizations.delegate,
         ],
       ),

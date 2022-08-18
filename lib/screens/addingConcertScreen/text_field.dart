@@ -7,11 +7,13 @@ class ConcertAddingTextField extends StatelessWidget {
     required this.controller,
     required this.labelText,
     this.keyboardType,
+    this.validator,
   }) : super(key: key);
 
   final TextEditingController controller;
   final String labelText;
   final TextInputType? keyboardType;
+  final FormFieldValidator<String>? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class ConcertAddingTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
+      validator: validator,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         labelText: labelText,

@@ -1,10 +1,9 @@
+import 'package:admin_app/dev_data/mock_concerts.dart';
+import 'package:admin_app/models/concert.dart';
 import 'package:admin_app/models/concert_builder.dart';
 import 'package:admin_app/resources/api/api_provider.dart';
 import 'package:admin_app/resources/database/storage_provider.dart';
 import 'package:flutter/material.dart';
-
-import '../../dev_data/mock_concerts.dart';
-import '../../models/concert.dart';
 
 class ConcertProvider extends ChangeNotifier {
   final ApiProvider apiProvider = ApiProvider();
@@ -25,7 +24,7 @@ class ConcertProvider extends ChangeNotifier {
   }
 
   void addConcert(Concert concert) {
-    apiProvider.postNewConcert(concert);
+    // apiProvider.postNewConcert(concert);
     _concerts.add(concert);
     notifyListeners();
   }

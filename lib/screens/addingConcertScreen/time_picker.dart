@@ -7,11 +7,13 @@ class TimePicker extends StatefulWidget {
     required this.controller,
     required this.textStyle,
     required this.labelText,
+    this.validator,
   }) : super(key: key);
 
   final TextEditingController controller;
   final TextStyle textStyle;
   final String labelText;
+  final FormFieldValidator<String>? validator;
 
   Color lightenColor(Color color, double amount) {
     assert(amount >= 0 && amount <= 1);
@@ -58,6 +60,7 @@ class _TimePickerState extends State<TimePicker> {
     return TextFormField(
       key: timeKey,
       controller: widget.controller,
+      validator: widget.validator,
       decoration: InputDecoration(
         border: const OutlineInputBorder(),
         labelText: widget.labelText,

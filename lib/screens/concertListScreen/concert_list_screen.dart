@@ -31,7 +31,13 @@ class ConcertListScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         label: const Text("Add Concert"),
         icon: const Icon(Icons.add),
-        onPressed: () => Navigator.pushNamed(context, Routes.addConcert1),
+        onPressed: () {
+          Provider.of<ConcertProvider>(
+            context,
+            listen: false,
+          ).createNewBuilder();
+          Navigator.pushNamed(context, Routes.addConcert1);
+        },
       ),
     );
   }
