@@ -2,7 +2,6 @@ import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
 import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
-import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_app/util/constants.dart' as constants;

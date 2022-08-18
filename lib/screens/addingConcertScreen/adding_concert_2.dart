@@ -2,7 +2,6 @@ import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_bu
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
 import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
 import 'package:admin_app/screens/addingConcertScreen/text_field.dart';
-import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/constants.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
@@ -20,10 +19,6 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
 
   @override
   Widget build(BuildContext context) {
-    var onPrimaryColorTextStyle = TextStyle(
-      color: Theme.of(context).colorScheme.onPrimary,
-    );
-
     return AddingConcertScaffold(
       appBarTitle: "Beschreibungen eingeben",
       child: Stack(
