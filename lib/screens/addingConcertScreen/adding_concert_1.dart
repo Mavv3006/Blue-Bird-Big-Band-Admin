@@ -1,7 +1,6 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
-import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
-import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
+import 'package:admin_app/screens/widgets/image_placeholder.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_app/util/constants.dart' as constants;
@@ -36,9 +35,13 @@ class _AddingConcert1ScreenState extends State<AddingConcert1Screen> {
     final ConcertProvider provider =
         Provider.of<ConcertProvider>(context, listen: false);
 
-    return AddingConcertScaffold(
-      appBarTitle: "Band auswählen",
-      child: Stack(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Band auswählen",
+        ),
+      ),
+      body: Stack(
         children: [
           Center(
             child: SingleChildScrollView(

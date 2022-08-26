@@ -1,8 +1,8 @@
 import 'package:admin_app/util/constants.dart';
 import 'package:flutter/material.dart';
 
-class ConcertAddingTextField extends StatelessWidget {
-  const ConcertAddingTextField({
+class MyTexField extends StatelessWidget {
+  const MyTexField({
     Key? key,
     required this.controller,
     required this.labelText,
@@ -17,9 +17,6 @@ class ConcertAddingTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var onPrimaryColorTextStyle = TextStyle(
-      color: Theme.of(context).colorScheme.onPrimary,
-    );
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
@@ -29,7 +26,20 @@ class ConcertAddingTextField extends StatelessWidget {
         labelText: labelText,
         enabledBorder: darkBlueOutlineInputBorder,
         focusedBorder: darkBlueOutlineInputBorder,
-        labelStyle: onPrimaryColorTextStyle,
+        floatingLabelStyle: MaterialStateTextStyle.resolveWith(
+          (Set<MaterialState> states) {
+            var themeData = Theme.of(context);
+            if (states.contains(MaterialState.error)) {
+              var inputTheme = themeData.inputDecorationTheme;
+              var mergeTheme =
+                  inputTheme.floatingLabelStyle ?? inputTheme.labelStyle;
+              return TextStyle(color: themeData.errorColor).merge(mergeTheme);
+            }
+            return TextStyle(
+              color: themeData.colorScheme.onPrimary,
+            );
+          },
+        ),
       ),
     );
   }

@@ -14,5 +14,6 @@ const darkBlueOutlineInputBorder = OutlineInputBorder(
   borderSide: darkBlueBorderSide,
 );
 const sizedBox32 = SizedBox(height: 32);
+const sizedBox16 = SizedBox(height: 16);
 
 const String dateFormatPattern = "dd.MM.yyyy";

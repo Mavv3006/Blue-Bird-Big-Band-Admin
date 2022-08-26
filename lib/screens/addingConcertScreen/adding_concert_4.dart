@@ -1,12 +1,10 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
-import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
-import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
-import 'package:admin_app/screens/addingConcertScreen/text_field.dart';
+import 'package:admin_app/screens/widgets/image_placeholder.dart';
+import 'package:admin_app/screens/widgets/text_field.dart';
 import 'package:admin_app/util/constants.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 import 'package:provider/provider.dart';
 
 class AddingConcert4Screen extends StatefulWidget {
@@ -25,9 +23,13 @@ class _AddingConcert4ScreenState extends State<AddingConcert4Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return AddingConcertScaffold(
-      appBarTitle: "Adresse eingeben",
-      child: Stack(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Adresse eingeben",
+        ),
+      ),
+      body: Stack(
         children: [
           Center(
             child: SingleChildScrollView(
@@ -54,7 +56,7 @@ class _AddingConcert4ScreenState extends State<AddingConcert4Screen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ConcertAddingTextField(
+                          MyTexField(
                             labelText: "Straßenname",
                             controller: streetController,
                             validator: (value) {
@@ -65,7 +67,7 @@ class _AddingConcert4ScreenState extends State<AddingConcert4Screen> {
                             },
                           ),
                           sizedBox32,
-                          ConcertAddingTextField(
+                          MyTexField(
                             controller: houseNumberController,
                             labelText: "Hausnummer",
                             validator: (value) {
@@ -76,7 +78,7 @@ class _AddingConcert4ScreenState extends State<AddingConcert4Screen> {
                             },
                           ),
                           sizedBox32,
-                          ConcertAddingTextField(
+                          MyTexField(
                             controller: plzController,
                             labelText: "PLZ",
                             keyboardType: TextInputType.number,
@@ -88,7 +90,7 @@ class _AddingConcert4ScreenState extends State<AddingConcert4Screen> {
                             },
                           ),
                           sizedBox32,
-                          ConcertAddingTextField(
+                          MyTexField(
                             controller: cityNameController,
                             labelText: "Stadtname",
                             validator: (value) {

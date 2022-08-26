@@ -4,6 +4,7 @@ import 'package:admin_app/screens/addingConcertScreen/adding_concert_2.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_3.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_4.dart';
 import 'package:admin_app/screens/concertListScreen/concert_list_screen.dart';
+import 'package:admin_app/screens/loginScreen/login_screen.dart';
 import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           Routes.addConcert2: (context) => const AddingConcert2Screen(),
           Routes.addConcert3: (context) => const AddingConcert3Screen(),
           Routes.addConcert4: (context) => const AddingConcert4Screen(),
+          Routes.login: (context) => const LoginScreen(),
         },
         supportedLocales: const [Locale('de', 'DE'), Locale('en', 'EN')],
         localizationsDelegates: const [

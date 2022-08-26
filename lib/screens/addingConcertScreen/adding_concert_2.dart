@@ -1,8 +1,7 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
-import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
-import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
-import 'package:admin_app/screens/addingConcertScreen/text_field.dart';
+import 'package:admin_app/screens/widgets/image_placeholder.dart';
+import 'package:admin_app/screens/widgets/text_field.dart';
 import 'package:admin_app/util/constants.dart';
 import 'package:admin_app/util/routes.dart';
 import 'package:flutter/material.dart';
@@ -22,9 +21,13 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
 
   @override
   Widget build(BuildContext context) {
-    return AddingConcertScaffold(
-      appBarTitle: "Beschreibungen eingeben",
-      child: Stack(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Beschreibungen eingeben",
+        ),
+      ),
+      body: Stack(
         children: [
           Center(
             child: SingleChildScrollView(
@@ -51,7 +54,7 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ConcertAddingTextField(
+                          MyTexField(
                             controller: locationController,
                             labelText: "Ortsbeschreibung",
                             validator: (value) {
@@ -62,7 +65,7 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
                             },
                           ),
                           sizedBox32,
-                          ConcertAddingTextField(
+                          MyTexField(
                             controller: organizerController,
                             labelText: "Veranstaltungsname",
                             validator: (value) {
@@ -83,17 +86,18 @@ class _AddingConcert2ScreenState extends State<AddingConcert2Screen> {
           AddingConcertContinueButton(
             buttonText: "Weiter",
             onPressed: () {
-              if (formKey.currentState != null &&
-                  formKey.currentState!.validate()) {
-                ConcertProvider provider = Provider.of<ConcertProvider>(
-                  context,
-                  listen: false,
-                );
-                final String place = locationController.text;
-                final String organizer = organizerController.text;
-                provider.builder.addDescription(place, organizer);
-                Navigator.pushNamed(context, Routes.addConcert3);
+              if (formKey.currentState == null ||
+                  !formKey.currentState!.validate()) {
+                return;
               }
+              ConcertProvider provider = Provider.of<ConcertProvider>(
+                context,
+                listen: false,
+              );
+              final String place = locationController.text;
+              final String organizer = organizerController.text;
+              provider.builder.addDescription(place, organizer);
+              Navigator.pushNamed(context, Routes.addConcert3);
             },
           ),
         ],

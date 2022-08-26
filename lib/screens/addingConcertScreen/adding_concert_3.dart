@@ -1,7 +1,6 @@
 import 'package:admin_app/resources/provider/concert_provider.dart';
 import 'package:admin_app/screens/addingConcertScreen/adding_concert_continue_button.dart';
-import 'package:admin_app/screens/addingConcertScreen/adding_concert_scaffold.dart';
-import 'package:admin_app/screens/addingConcertScreen/image_placeholder.dart';
+import 'package:admin_app/screens/widgets/image_placeholder.dart';
 import 'package:admin_app/screens/addingConcertScreen/time_picker.dart';
 import 'package:admin_app/util/colors.dart';
 import 'package:admin_app/util/constants.dart';
@@ -42,9 +41,13 @@ class _AddingConcert3ScreenState extends State<AddingConcert3Screen> {
       color: Theme.of(context).colorScheme.onPrimary,
     );
 
-    return AddingConcertScaffold(
-      appBarTitle: "Datum + Uhrzeit eingeben",
-      child: Stack(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Datum + Uhrzeit eingeben",
+        ),
+      ),
+      body: Stack(
         children: [
           Center(
             child: SingleChildScrollView(
